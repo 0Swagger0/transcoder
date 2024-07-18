@@ -1,10 +1,8 @@
+// server.js
 const express = require("express");
-const ytdl = require("@distube/ytdl-core");
-const cors = require("cors");
+const ytstream = require("yt-stream");
 const app = express();
 const port = 3000;
-
-app.use(cors());
 
 app.get("/stream", async (req, res) => {
   const videoId = req.query.id;
@@ -13,15 +11,19 @@ app.get("/stream", async (req, res) => {
     return res.status(400).send("Missing YouTube video ID");
   }
 
+  const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
   try {
-    const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
-    const stream = ytdl(videoUrl, { quality: "highestaudio" });
+    const stream = await ytstream.stream(videoUrl, {
+      quality: "high",
+      type: "audio",
+      highWaterMark: 1048576 * 32,
+      download: true,
+    });
 
-    res.setHeader("Content-Type", "audio/mpeg");
-    stream.pipe(res);
-  } catch (err) {
-    console.error("Stream error:", err);
-    res.status(500).send("Failed to stream audio");
+    stream.stream.pipe(res);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching audio stream");
   }
 });
 
