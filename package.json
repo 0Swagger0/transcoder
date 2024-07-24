@@ -10,12 +10,10 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@discordjs/voice": "^0.17.0",
     "axios": "^1.7.2",
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "googleapis": "^140.0.1",
-    "puppeteer": "^22.13.1",
     "yt-stream": "^1.6.9"
   }
 }
