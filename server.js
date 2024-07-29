@@ -24,15 +24,14 @@ app.get("/stream", async (req, res) => {
     Connection: "keep-alive",
     "Cache-Control": "max-age=0",
     "Upgrade-Insecure-Requests": "1",
-
     Accept:
       "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
   });
 
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
   // Base user agent string with a placeholder for the Gecko date
-  const baseUserAgent =
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:94.0) Gecko/[DATE] Firefox/94.0";
+  ytstream.userAgent =
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:94.0) Gecko/20100101 Firefox/94.0";
 
   try {
     const stream = await ytstream.stream(videoUrl, {
