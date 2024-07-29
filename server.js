@@ -24,13 +24,18 @@ app.get("/stream", async (req, res) => {
     Connection: "keep-alive",
     "Cache-Control": "max-age=0",
     "Upgrade-Insecure-Requests": "1",
+
     Accept:
       "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
   });
 
-  agent.syncFile(`./cookies.json`);
+  const agent = new ytstream.YTStreamAgent([], {
+    keepAlive: true,
+    keepAliveMsecs: 5e3,
+  });
+
   ytstream.setGlobalAgent(agent);
-  agent.removeCookies(true);
+  agent.syncFile(`./cookies.json`);
 
   // Base user agent string with a placeholder for the Gecko date
   const baseUserAgent =
