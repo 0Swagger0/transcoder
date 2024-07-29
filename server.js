@@ -13,11 +13,6 @@ app.get("/stream", async (req, res) => {
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
   // Base user agent string with a placeholder for the Gecko date
 
-  res.writeHead(200, {
-    "Content-Type": "audio/mpeg", // Set appropriate content type
-    "Content-Disposition": "inline",
-  });
-
   try {
     const stream = await ytstream.stream(videoUrl, {
       download: true,
