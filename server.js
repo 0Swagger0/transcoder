@@ -15,37 +15,24 @@ app.get("/stream", async (req, res) => {
     return res.status(400).send("Missing YouTube video ID");
   }
 
-  // ytstream.setGlobalHeaders({
-  //   "User-Agent":
-  //     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-  //   "Accept-Language": "en-US,en;q=0.9",
-  //   Referer: "https://www.youtube.com/",
-  //   Origin: "https://www.youtube.com",
-  //   Connection: "keep-alive",
-  //   "Cache-Control": "max-age=0",
-  //   "Upgrade-Insecure-Requests": "1",
+  ytstream.setGlobalHeaders({
+    "User-Agent":
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+    "Accept-Language": "en-US,en;q=0.9",
+    Referer: "https://www.youtube.com/",
+    Origin: "https://www.youtube.com",
+    Connection: "keep-alive",
+    "Cache-Control": "max-age=0",
+    "Upgrade-Insecure-Requests": "1",
 
-  //   Accept:
-  //     "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
-  // });
+    Accept:
+      "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
+  });
 
+  const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
   // Base user agent string with a placeholder for the Gecko date
   const baseUserAgent =
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:94.0) Gecko/[DATE] Firefox/94.0";
-
-  const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
-
-  // Function to generate a random date string in YYYYMMDD format
-  function getRandomGeckoDate() {
-    const year = Math.floor(Math.random() * (2023 - 2000 + 1)) + 2000; // Random year between 2000 and 2023
-    const month = ("0" + (Math.floor(Math.random() * 12) + 1)).slice(-2); // Random month between 01 and 12
-    const day = ("0" + (Math.floor(Math.random() * 28) + 1)).slice(-2); // Random day between 01 and 28 to avoid complexities with month lengths
-
-    return `${year}${month}${day}`;
-  }
-
-  const geckoDate = getRandomGeckoDate();
-  ytstream.userAgent = baseUserAgent.replace("[DATE]", geckoDate);
 
   try {
     const stream = await ytstream.stream(videoUrl, {
