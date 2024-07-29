@@ -3,6 +3,32 @@ const ytstream = require("yt-stream");
 const app = express();
 const port = 3000;
 
+ytstream.setGlobalHeaders({
+  "Accept-Language": "en-US,en;q=0.5",
+});
+
+const agent = new ytstream.YTStreamAgent(
+  [
+    {
+      key: "SOCS",
+      value: "CAI",
+      domain: "youtube.com",
+      expires: "Infinity",
+      sameSite: "lax",
+      httpOnly: false,
+      hostOnly: false,
+      secure: true,
+      path: "/",
+    },
+  ],
+  {
+    keepAlive: true,
+    keepAliveMsecs: 5e3,
+  }
+);
+
+ytstream.setGlobalAgent(agent);
+
 app.get("/stream", async (req, res) => {
   const videoId = req.query.id;
 
@@ -10,19 +36,21 @@ app.get("/stream", async (req, res) => {
     return res.status(400).send("Missing YouTube video ID");
   }
 
-  ytstream.userAgent =
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:94.0) Gecko/20100101 Firefox/94.0";
-
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
   // Base user agent string with a placeholder for the Gecko date
+
+  res.writeHead(200, {
+    "Content-Type": "audio/mpeg", // Set appropriate content type
+    "Content-Disposition": "inline",
+  });
 
   try {
     const stream = await ytstream.stream(videoUrl, {
       download: true,
-      type: "audio",
       quality: "high",
+      highWaterMark: 1048576 * 32,
+      type: "audio",
     });
-
     stream.stream.pipe(res);
   } catch (error) {
     console.error("Error fetching audio stream:", error);
