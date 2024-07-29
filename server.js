@@ -3,10 +3,6 @@ const ytstream = require("yt-stream");
 const app = express();
 const port = 3000;
 
-ytstream.setGlobalHeaders({
-  "Accept-Language": "en-US,en;q=0.5",
-});
-
 const agent = new ytstream.YTStreamAgent(
   [
     {
