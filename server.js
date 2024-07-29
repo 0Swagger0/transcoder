@@ -3,28 +3,6 @@ const ytstream = require("yt-stream");
 const app = express();
 const port = 3000;
 
-const agent = new ytstream.YTStreamAgent(
-  [
-    {
-      key: "SOCS",
-      value: "CAI",
-      domain: "youtube.com",
-      expires: "Infinity",
-      sameSite: "lax",
-      httpOnly: false,
-      hostOnly: false,
-      secure: true,
-      path: "/",
-    },
-  ],
-  {
-    keepAlive: true,
-    keepAliveMsecs: 5e3,
-  }
-);
-
-ytstream.setGlobalAgent(agent);
-
 app.get("/stream", async (req, res) => {
   const videoId = req.query.id;
 
