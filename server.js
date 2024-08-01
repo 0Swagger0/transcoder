@@ -17,7 +17,7 @@ async function updateCookies() {
     existingCookies = JSON.parse(cookiesData);
   }
 
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
   await page.goto("https://www.youtube.com");
 
@@ -56,6 +56,8 @@ app.get("/stream", async (req, res) => {
 
   try {
     const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+
+    res.setHeader("Content-Type", "audio/mpeg");
 
     ytdl(videoUrl, {
       agent,
