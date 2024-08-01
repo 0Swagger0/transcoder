@@ -13,7 +13,15 @@ app.get("/stream", async (req, res) => {
   }
 
   // agent should be created once if you don't want to change your cookie
-  const agent = ytdl.createAgent(JSON.parse(fs.readFileSync("cookies.json")));
+  const agentOptions = {
+    pipelining: 5,
+    maxRedirections: 0,
+    localAddress: "10.244.38.65",
+  };
+  const agent = ytdl.createAgent(
+    JSON.parse(fs.readFileSync("cookies.json")),
+    agentOptions
+  );
 
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
 
