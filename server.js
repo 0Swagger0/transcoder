@@ -16,7 +16,6 @@ app.get("/stream", async (req, res) => {
   const agentOptions = {
     pipelining: 5,
     maxRedirections: 0,
-    localAddress: "10.244.38.65",
   };
   const agent = ytdl.createAgent(
     JSON.parse(fs.readFileSync("cookies.json")),
