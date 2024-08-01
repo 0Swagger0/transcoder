@@ -3,26 +3,21 @@ const ytdl = require("@distube/ytdl-core");
 const fs = require("fs");
 const puppeteer = require("puppeteer");
 const app = express();
-const port = 3000;
+const port = 4000;
 
-// Function to refresh cookies using Puppeteer
+const COOKIE_PATH = "cookies.json";
+
+// Function to generate cookies using Puppeteer
 async function refreshCookies() {
-  const browser = await puppeteer.launch({ headless: true });
+  // Launch Puppeteer with specified Chrome path or default
+  const browser = await puppeteer.launch({
+    headless: true, // Run in headless mode
+    executablePath: "/path/to/chrome", // Optional: Specify Chrome path if needed
+  });
   const page = await browser.newPage();
-
-  // Navigate to YouTube and log in (requires automation logic for login)
-  await page.goto("https://www.youtube.com");
-
-  // Add logic to automate the login process
-
-  // Wait for login to complete and cookies to be set
-  await page.waitForNavigation();
-
-  // Get cookies and write them to a file
+  await page.goto("https://www.youtube.com"); // Visit YouTube to get cookies
   const cookies = await page.cookies();
-  fs.writeFileSync("cookies.json", JSON.stringify(cookies));
-  console.log(cookies);
-
+  fs.writeFileSync(COOKIE_PATH, JSON.stringify(cookies));
   await browser.close();
 }
 
@@ -32,12 +27,14 @@ app.get("/stream", async (req, res) => {
   if (!videoId) {
     return res.status(400).send("Missing YouTube video ID");
   }
-
   // const agent = ytdl.createAgent(JSON.parse(fs.readFileSync("cookies.json")));
+  // Refresh cookies if they don't exist or are outdated
+  if (!fs.existsSync(COOKIE_PATH)) {
+    await refreshCookies();
+  }
 
-  const cookies = JSON.parse(fs.readFileSync("cookies.json"));
-  const agent = ytdl.createAgent(cookies);
-  console.log(cookies);
+  const cookies = JSON.parse(fs.readFileSync(COOKIE_PATH, "utf8"));
+  const agent = ytdl.createAgent(cookies); // Create an agent with cookies
 
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
 
@@ -55,5 +52,4 @@ app.get("/stream", async (req, res) => {
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
-  refreshCookies().catch(console.error);
 });
