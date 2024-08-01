@@ -1,7 +1,7 @@
 [
   {
     "domain": ".youtube.com",
-    "expirationDate": 1757056941.207113,
+    "expirationDate": 1880193473.5041268,
     "hostOnly": false,
     "httpOnly": false,
     "name": "__Secure-1PAPISID",
@@ -15,7 +15,7 @@
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1757056941.20805,
+    "expirationDate": 1880193473.5041268,
     "hostOnly": false,
     "httpOnly": true,
     "name": "__Secure-1PSID",
@@ -29,7 +29,7 @@
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1754047480.230609,
+    "expirationDate": 1880193473.5041268,
     "hostOnly": false,
     "httpOnly": true,
     "name": "__Secure-1PSIDCC",
@@ -43,7 +43,7 @@
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1754047408.317717,
+    "expirationDate": 1880193473.5041268,
     "hostOnly": false,
     "httpOnly": true,
     "name": "__Secure-1PSIDTS",
@@ -57,7 +57,7 @@
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1757056941.207162,
+    "expirationDate": 1880193473.5041268,
     "hostOnly": false,
     "httpOnly": false,
     "name": "__Secure-3PAPISID",
@@ -71,7 +71,7 @@
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1757056941.208101,
+    "expirationDate": 1880193473.5041268,
     "hostOnly": false,
     "httpOnly": true,
     "name": "__Secure-3PSID",
@@ -85,7 +85,7 @@
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1754047480.230678,
+    "expirationDate": 1880193473.5041268,
     "hostOnly": false,
     "httpOnly": true,
     "name": "__Secure-3PSIDCC",
@@ -99,7 +99,7 @@
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1754047408.317817,
+    "expirationDate": 1880193473.5041268,
     "hostOnly": false,
     "httpOnly": true,
     "name": "__Secure-3PSIDTS",
@@ -113,7 +113,7 @@
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1757056941.20701,
+    "expirationDate": 1880193473.5041268,
     "hostOnly": false,
     "httpOnly": false,
     "name": "APISID",
@@ -127,7 +127,7 @@
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1757056941.206863,
+    "expirationDate": 1880193473.5041268,
     "hostOnly": false,
     "httpOnly": true,
     "name": "HSID",
@@ -141,7 +141,7 @@
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1744626965.571484,
+    "expirationDate": 1880193473.5041268,
     "hostOnly": false,
     "httpOnly": true,
     "name": "LOGIN_INFO",
@@ -155,7 +155,7 @@
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1757071482.373149,
+    "expirationDate": 1880193473.5041268,
     "hostOnly": false,
     "httpOnly": false,
     "name": "PREF",
@@ -169,7 +169,7 @@
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1757056941.207063,
+    "expirationDate": 1880193473.5041268,
     "hostOnly": false,
     "httpOnly": false,
     "name": "SAPISID",
@@ -183,7 +183,7 @@
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1757056941.207998,
+    "expirationDate": 1880193473.5041268,
     "hostOnly": false,
     "httpOnly": false,
     "name": "SID",
@@ -197,7 +197,7 @@
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1754047480.2305,
+    "expirationDate": 1880193473.5041268,
     "hostOnly": false,
     "httpOnly": false,
     "name": "SIDCC",
@@ -211,7 +211,7 @@
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1757056941.20696,
+    "expirationDate": 1880193473.5041268,
     "hostOnly": false,
     "httpOnly": true,
     "name": "SSID",
