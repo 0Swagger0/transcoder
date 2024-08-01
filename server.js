@@ -12,12 +12,12 @@ async function refreshCookies() {
   // Launch Puppeteer with specified Chrome path or default
   const browser = await puppeteer.launch({
     headless: true, // Run in headless mode
-    executablePath: "/path/to/chrome", // Optional: Specify Chrome path if needed
   });
   const page = await browser.newPage();
   await page.goto("https://www.youtube.com"); // Visit YouTube to get cookies
   const cookies = await page.cookies();
   fs.writeFileSync(COOKIE_PATH, JSON.stringify(cookies));
+
   await browser.close();
 }
 
