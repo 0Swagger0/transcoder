@@ -1,7 +1,7 @@
 const express = require("express");
 const ytdl = require("@distube/ytdl-core");
 const fs = require("fs");
-const puppeteer = require("puppeteer");
+const puppeteer = require("puppeteer-core");
 const app = express();
 const path = require("path");
 const port = 3000;
@@ -19,6 +19,7 @@ async function updateCookies() {
 
   const browser = await puppeteer.launch({
     headless: true,
+    executablePath: "/usr/bin/chromium-browser",
   });
   const page = await browser.newPage();
   await page.goto("https://www.youtube.com");
