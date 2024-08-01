@@ -14,16 +14,11 @@ app.get("/stream", async (req, res) => {
 
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
   // Base user agent string with a placeholder for the Gecko date
-  // const agent = ytdl.createAgent(JSON.parse(fs.readFileSync("cookies.json")));
+  const agent = ytdl.createAgent(JSON.parse(fs.readFileSync("cookies.json")));
 
   try {
     ytdl(videoUrl, {
-      requestOptions: {
-        headers: {
-          "User-Agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-        },
-      },
+      agent,
       filter: "audioonly",
       quality: "highestaudio",
     }).pipe(res);
