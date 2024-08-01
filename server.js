@@ -1,6 +1,7 @@
 const express = require("express");
 const ytdl = require("@distube/ytdl-core");
 const fs = require("fs");
+require("dotenv").config();
 const app = express();
 const port = 3000;
 
