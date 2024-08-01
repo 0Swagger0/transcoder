@@ -2,6 +2,7 @@ const express = require("express");
 const ytdl = require("@distube/ytdl-core");
 const fs = require("fs");
 const puppeteer = require("puppeteer");
+const { getRandomIPv6 } = require("@distube/ytdl-core/lib/utils");
 const app = express();
 const port = 3000;
 
@@ -13,14 +14,9 @@ app.get("/stream", async (req, res) => {
   }
 
   // agent should be created once if you don't want to change your cookie
-  const agentOptions = {
-    pipelining: 5,
-    maxRedirections: 0,
-  };
-  const agent = ytdl.createAgent(
-    JSON.parse(fs.readFileSync("cookies.json")),
-    agentOptions
-  );
+  const agent = ytdl.createAgent(undefined, {
+    localAddress: getRandomIPv6("2001:2::/48"),
+  });
 
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
 
