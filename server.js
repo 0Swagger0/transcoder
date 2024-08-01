@@ -19,7 +19,6 @@ async function updateCookies() {
 
   const browser = await puppeteer.launch({
     headless: true,
-    executablePath: "/path/to/chrome",
   });
   const page = await browser.newPage();
   await page.goto("https://www.youtube.com");
