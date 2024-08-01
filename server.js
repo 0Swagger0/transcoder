@@ -1,5 +1,6 @@
 const express = require("express");
-const ytstream = require("yt-stream");
+const ytdl = require("@distube/ytdl-core");
+const fs = require("fs");
 const app = express();
 const port = 3000;
 
@@ -12,15 +13,13 @@ app.get("/stream", async (req, res) => {
 
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
   // Base user agent string with a placeholder for the Gecko date
+  // const agent = ytdl.createAgent(JSON.parse(fs.readFileSync("cookies.json")));
 
   try {
-    const stream = await ytstream.stream(videoUrl, {
-      download: true,
-      quality: "high",
-      highWaterMark: 1048576 * 32,
-      type: "audio",
-    });
-    stream.stream.pipe(res);
+    ytdl(videoUrl, {
+      filter: "audioonly",
+      quality: "highestaudio",
+    }).pipe(res);
   } catch (error) {
     console.error("Error fetching audio stream:", error);
     res.status(500).send("Error fetching audio stream");

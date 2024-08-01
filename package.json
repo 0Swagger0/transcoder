@@ -10,8 +10,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@distube/ytdl-core": "^4.13.7",
     "axios": "^1.7.2",
-    "express": "^4.19.2",
-    "yt-stream": "^1.7.2"
+    "express": "^4.19.2"
   }
 }
