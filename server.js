@@ -4,10 +4,6 @@ const app = express();
 const ytstream = require("yt-stream");
 const port = 3000;
 
-ytstream.setApiKey(`AIzaSyAGA9Qf7bwq96eFE5GhAEAgQGmDryMlFNA`);
-ytstream.setPreference("api", "ANDROID");
-ytstream.setPreference("scrape");
-
 app.get("/stream", async (req, res) => {
   const videoId = req.query.id;
 
@@ -16,6 +12,33 @@ app.get("/stream", async (req, res) => {
   }
 
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+
+  ytstream.setApiKey(`AIzaSyAGA9Qf7bwq96eFE5GhAEAgQGmDryMlFNA`);
+  ytstream.setPreference("api", "ANDROID");
+  ytstream.setPreference("scrape");
+
+  const agent = new ytstream.YTStreamAgent(
+    [
+      {
+        key: "SOCS",
+        value: "CAI",
+        domain: "youtube.com",
+        expires: "Infinity",
+        sameSite: "lax",
+        httpOnly: false,
+        hostOnly: false,
+        secure: true,
+        path: "/",
+      },
+    ],
+    {
+      localAddress: "127.0.0.1",
+      keepAlive: true,
+      keepAliveMsecs: 5e3,
+    }
+  );
+
+  ytstream.setGlobalAgent(agent);
 
   try {
     try {
