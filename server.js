@@ -13,6 +13,9 @@ app.get("/stream", async (req, res) => {
 
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
 
+  ytstream.userAgent =
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:94.0) Gecko/20100101 Firefox/94.0";
+
   try {
     try {
       const stream = await ytstream.stream(videoUrl, {
