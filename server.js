@@ -17,42 +17,25 @@ app.get("/stream", async (req, res) => {
   ytstream.setPreference("api", "ANDROID");
   ytstream.setPreference("scrape");
 
-  const agent = new ytstream.YTStreamAgent(
-    [
-      {
-        key: "SOCS",
-        value: "CAI",
-        domain: "youtube.com",
-        expires: "Infinity",
-        sameSite: "lax",
-        httpOnly: false,
-        hostOnly: false,
-        secure: true,
-        path: "/",
-      },
-    ],
-    {
-      localAddress: "127.0.0.1",
-      keepAlive: true,
-      keepAliveMsecs: 5e3,
-    }
-  );
+  const agent = new ytstream.YTStreamAgent([], {
+    localAddress: "127.0.0.1",
+    keepAlive: true,
+    keepAliveMsecs: 5e3,
+  });
 
-  ytstream.setGlobalAgent(agent);
+  agent.syncFile(path.join(__dirname, `./cookies.json`));
 
   try {
-    try {
-      const stream = await ytstream.stream(videoUrl, {
-        download: true,
-        quality: "high",
-        highWaterMark: 1048576 * 32,
-        type: "audio",
-      });
-      stream.stream.pipe(res);
-    } catch (error) {
-      console.error("Error fetching audio stream:", error);
-      res.status(500).send("Error fetching audio stream");
-    }
+    const stream = await ytstream.stream(videoUrl, {
+      download: true,
+      quality: "high",
+      highWaterMark: 1048576 * 32,
+      type: "audio",
+    });
+    stream.stream.pipe(res);
+
+    console.error("Error fetching audio stream:", error);
+    res.status(500).send("Error fetching audio stream");
   } catch (error) {
     console.error("Error fetching audio stream:", error);
     res.status(500).send("Error fetching audio stream");
