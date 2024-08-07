@@ -1,9 +1,9 @@
 const express = require("express");
-const ytdl = require("@distube/ytdl-core");
 const fs = require("fs");
 const puppeteer = require("puppeteer-core");
 const app = express();
 const path = require("path");
+const ytstream = require("yt-stream");
 const port = 3000;
 
 const COOKIES_PATH = path.resolve(__dirname, "cookies.json");
@@ -52,21 +52,29 @@ app.get("/stream", async (req, res) => {
   if (!videoId) {
     return res.status(400).send("Missing YouTube video ID");
   }
-  await updateCookies();
 
   const cookies = JSON.parse(fs.readFileSync(COOKIES_PATH));
-  const agent = ytdl.createAgent(cookies);
+
+  const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
 
   try {
-    const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+    res.writeHead(200, {
+      "Content-Type": "audio/mpeg", // Set appropriate content type
+      "Content-Disposition": "inline",
+    });
 
-    res.setHeader("Content-Type", "audio/mpeg");
-
-    ytdl(videoUrl, {
-      agent,
-      filter: "audioonly",
-      quality: "highestaudio",
-    }).pipe(res);
+    try {
+      const stream = await ytstream.stream(videoUrl, {
+        download: true,
+        quality: "high",
+        highWaterMark: 1048576 * 32,
+        type: "audio",
+      });
+      stream.stream.pipe(res);
+    } catch (error) {
+      console.error("Error fetching audio stream:", error);
+      res.status(500).send("Error fetching audio stream");
+    }
   } catch (error) {
     console.error("Error fetching audio stream:", error);
     res.status(500).send("Error fetching audio stream");
