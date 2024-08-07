@@ -2,7 +2,12 @@ const express = require("express");
 const fs = require("fs");
 const app = express();
 const ytstream = require("yt-stream");
+const path = require("path");
 const port = 3000;
+
+ytstream.setApiKey(`AIzaSyAGA9Qf7bwq96eFE5GhAEAgQGmDryMlFNA`);
+ytstream.setPreference("api", "ANDROID");
+ytstream.setPreference("scrape");
 
 app.get("/stream", async (req, res) => {
   const videoId = req.query.id;
@@ -13,12 +18,8 @@ app.get("/stream", async (req, res) => {
 
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
 
-  ytstream.setApiKey(`AIzaSyAGA9Qf7bwq96eFE5GhAEAgQGmDryMlFNA`);
-  ytstream.setPreference("api", "ANDROID");
-  ytstream.setPreference("scrape");
-
   const agent = new ytstream.YTStreamAgent([], {
-    localAddress: "127.0.0.1",
+    localAddress: "10.244.53.138",
     keepAlive: true,
     keepAliveMsecs: 5e3,
   });
