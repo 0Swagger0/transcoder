@@ -127,7 +127,7 @@
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1723023192,
+    "expirationDate": 1723026000,
     "hostOnly": false,
     "httpOnly": false,
     "name": "CONSISTENCY",
