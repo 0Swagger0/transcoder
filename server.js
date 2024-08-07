@@ -2,6 +2,7 @@ const express = require("express");
 const fs = require("fs");
 const app = express();
 const ytstream = require("yt-stream");
+const path = require("path");
 const port = 3000;
 
 app.get("/stream", async (req, res) => {
@@ -17,7 +18,10 @@ app.get("/stream", async (req, res) => {
   ytstream.setPreference("api", "ANDROID");
   ytstream.setPreference("scrape");
 
-  ytstream.setGlobalAgent(JSON.parse(fs.readFileSync("cookies.json")));
+  const agent = new ytstream.YTStreamAgent(
+    JSON.parse(fs.readFileSync("cookies.json"))
+  );
+  ytstream.setGlobalAgent(agent);
 
   try {
     const stream = await ytstream.stream(videoUrl, {
