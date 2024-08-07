@@ -4,6 +4,10 @@ const app = express();
 const ytstream = require("yt-stream");
 const port = 3000;
 
+ytstream.setApiKey(`AIzaSyAGA9Qf7bwq96eFE5GhAEAgQGmDryMlFNA`);
+ytstream.setPreference("api", "ANDROID");
+ytstream.setPreference("scrape");
+
 app.get("/stream", async (req, res) => {
   const videoId = req.query.id;
 
