@@ -9,42 +9,42 @@ const port = 3000;
 const COOKIES_PATH = path.resolve(__dirname, "cookies.json");
 
 // Function to update cookies using Puppeteer
-async function updateCookies() {
-  let existingCookies = [];
+// async function updateCookies() {
+//   let existingCookies = [];
 
-  if (fs.existsSync(COOKIES_PATH)) {
-    const cookiesData = fs.readFileSync(COOKIES_PATH);
-    existingCookies = JSON.parse(cookiesData);
-  }
+//   if (fs.existsSync(COOKIES_PATH)) {
+//     const cookiesData = fs.readFileSync(COOKIES_PATH);
+//     existingCookies = JSON.parse(cookiesData);
+//   }
 
-  const browser = await puppeteer.launch({
-    headless: true,
-    executablePath: "/usr/bin/chromium-browser",
-  });
-  const page = await browser.newPage();
-  await page.goto("https://www.youtube.com");
+//   const browser = await puppeteer.launch({
+//     headless: true,
+//     executablePath: "/usr/bin/chromium-browser",
+//   });
+//   const page = await browser.newPage();
+//   await page.goto("https://www.youtube.com");
 
-  const newCookies = await page.cookies();
+//   const newCookies = await page.cookies();
 
-  const updatedCookies = existingCookies.map((cookie, index) => {
-    const newCookie = newCookies.find(
-      (c) => c.name === cookie.name && c.domain === cookie.domain
-    );
-    return {
-      ...cookie,
-      expirationDate: newCookie
-        ? newCookie.expires
-        : Date.now() / 1000 + 30 * 24 * 60 * 60,
-      id: index + 1,
-    };
-  });
+//   const updatedCookies = existingCookies.map((cookie, index) => {
+//     const newCookie = newCookies.find(
+//       (c) => c.name === cookie.name && c.domain === cookie.domain
+//     );
+//     return {
+//       ...cookie,
+//       expirationDate: newCookie
+//         ? newCookie.expires
+//         : Date.now() / 1000 + 30 * 24 * 60 * 60,
+//       id: index + 1,
+//     };
+//   });
 
-  fs.writeFileSync(COOKIES_PATH, JSON.stringify(updatedCookies, null, 2));
+//   fs.writeFileSync(COOKIES_PATH, JSON.stringify(updatedCookies, null, 2));
 
-  await browser.close();
+//   await browser.close();
 
-  return updatedCookies;
-}
+//   return updatedCookies;
+// }
 
 app.get("/stream", async (req, res) => {
   const videoId = req.query.id;
