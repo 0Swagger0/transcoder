@@ -11,11 +11,9 @@ app.get("/stream", async (req, res) => {
     return res.status(400).send("Missing YouTube video ID");
   }
 
-  const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
-
   ytstream.userAgent =
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:94.0) Gecko/20100101 Firefox/94.0";
-
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3";
+  const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
   try {
     const stream = await ytstream.stream(videoUrl, {
       download: true,
