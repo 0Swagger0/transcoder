@@ -17,18 +17,14 @@ app.get("/stream", async (req, res) => {
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:94.0) Gecko/20100101 Firefox/94.0";
 
   try {
-    try {
-      const stream = await ytstream.stream(videoUrl, {
-        download: true,
-        quality: "high",
-        highWaterMark: 1048576 * 32,
-        type: "audio",
-      });
-      stream.stream.pipe(res);
-    } catch (error) {
-      console.error("Error fetching audio stream:", error);
-      res.status(500).send("Error fetching audio stream");
-    }
+    const stream = await ytstream.stream(videoUrl, {
+      download: true,
+      quality: "high",
+      type: "audio",
+    });
+
+    res.setHeader("Content-Type", "audio/mpeg");
+    stream.stream.pipe(res);
   } catch (error) {
     console.error("Error fetching audio stream:", error);
     res.status(500).send("Error fetching audio stream");
