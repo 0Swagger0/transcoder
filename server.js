@@ -2,6 +2,7 @@ const express = require("express");
 const fs = require("fs");
 const app = express();
 const ytstream = require("yt-stream");
+const path = require("path");
 const port = 3000;
 const puppeteer = require("puppeteer-extra");
 const StealthPlugin = require("puppeteer-extra-plugin-stealth");
@@ -16,9 +17,9 @@ app.get("/stream", async (req, res) => {
 
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
 
-  ytstream.setApiKey("AIzaSyAGA9Qf7bwq96eFE5GhAEAgQGmDryMlFNA");
-  ytstream.setPreference("api", "ANDROID");
-  ytstream.setPreference("scrape");
+  // ytstream.setApiKey("AIzaSyAGA9Qf7bwq96eFE5GhAEAgQGmDryMlFNA");
+  // ytstream.setPreference("api", "ANDROID");
+  // ytstream.setPreference("scrape");
 
   const agent = new ytstream.YTStreamAgent(
     JSON.parse(fs.readFileSync("cookies.json"))
