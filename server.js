@@ -8,6 +8,8 @@ const puppeteer = require("puppeteer-extra");
 const StealthPlugin = require("puppeteer-extra-plugin-stealth");
 puppeteer.use(StealthPlugin());
 
+ytstream.setApiKey("AIzaSyAGA9Qf7bwq96eFE5GhAEAgQGmDryMlFNA");
+
 app.get("/stream", async (req, res) => {
   const videoId = req.query.id;
 
@@ -16,10 +18,6 @@ app.get("/stream", async (req, res) => {
   }
 
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
-
-  // ytstream.setApiKey("AIzaSyAGA9Qf7bwq96eFE5GhAEAgQGmDryMlFNA");
-  // ytstream.setPreference("api", "ANDROID");
-  // ytstream.setPreference("scrape");
 
   const agent = new ytstream.YTStreamAgent(
     JSON.parse(fs.readFileSync("cookies.json"))
