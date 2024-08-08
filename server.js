@@ -20,13 +20,13 @@ app.get("/stream", async (req, res) => {
   const agent = ytdl.createAgent(JSON.parse(fs.readFileSync("cookies.json")));
 
   try {
-    res.setHeader("Content-Type", "audio/mpeg");
-
     ytdl(videoUrl, {
       agent,
       filter: "audioonly",
       quality: "highestaudio",
     }).pipe(res);
+
+    res.setHeader("Content-Type", "audio/mpeg");
   } catch (error) {
     console.error("Error fetching audio stream:", error);
     res.status(500).send("Error fetching audio stream");
