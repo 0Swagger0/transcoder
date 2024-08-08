@@ -8,6 +8,16 @@ const puppeteer = require("puppeteer-extra");
 const StealthPlugin = require("puppeteer-extra-plugin-stealth");
 puppeteer.use(StealthPlugin());
 
+const agentOptions = {
+  pipelining: 5,
+  maxRedirections: 0,
+};
+
+const agent = ytdl.createAgent(
+  JSON.parse(fs.readFileSync("cookies.json")),
+  agentOptions
+);
+
 app.get("/stream", async (req, res) => {
   const videoId = req.query.id;
 
@@ -17,13 +27,10 @@ app.get("/stream", async (req, res) => {
 
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
 
-  const agent = ytdl.createAgent(JSON.parse(fs.readFileSync("cookies.json")));
-
   try {
     ytdl(videoUrl, {
       agent,
       filter: "audioonly",
-      quality: "highestaudio",
     }).pipe(res);
 
     res.setHeader("Content-Type", "audio/mpeg");
