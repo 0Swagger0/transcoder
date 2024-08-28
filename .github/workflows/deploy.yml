@@ -39,4 +39,4 @@ jobs:
         with:
           project: "arjunmeena-transcoder-60"
           entrypoint: "."
-          root: "./"
+          root: "."
