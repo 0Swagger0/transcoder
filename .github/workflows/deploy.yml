@@ -35,5 +35,5 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "arjunmeena-transcoder-99"
-          entrypoint: "./"
-          root: "."
+          entrypoint: "."
+          root: "./"
