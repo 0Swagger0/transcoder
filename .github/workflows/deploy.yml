@@ -36,4 +36,4 @@ jobs:
         with:
           project: "arjunmeena-transcoder-99"
           entrypoint: "server.js"
-          root: "home/runner/work/transcoder/transcoder"
+          root: "transcoder"
