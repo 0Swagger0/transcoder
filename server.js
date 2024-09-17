@@ -13,10 +13,7 @@ const agentOptions = {
   maxRedirections: 0,
 };
 
-const agent = ytdl.createAgent(
-  JSON.parse(fs.readFileSync("cookies.json")),
-  agentOptions
-);
+const agent = ytdl.createAgent(JSON.parse(fs.readFileSync("cookies.json")));
 
 app.get("/stream", async (req, res) => {
   const videoId = req.query.id;
@@ -30,6 +27,12 @@ app.get("/stream", async (req, res) => {
   try {
     ytdl(videoUrl, {
       agent,
+      requestOptions: {
+        headers: {
+          "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+        },
+      },
       filter: "audioonly",
     }).pipe(res);
 
