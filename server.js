@@ -11,9 +11,12 @@ puppeteer.use(StealthPlugin());
 const agentOptions = {
   pipelining: 5,
   maxRedirections: 0,
+  localAddress: "127.0.0.1",
 };
 
-const agent = ytdl.createAgent(JSON.parse(fs.readFileSync("cookies.json")));
+const agent = ytdl.createAgent(
+  JSON.parse(fs.readFileSync("cookies.json"), agentOptions)
+);
 
 app.get("/stream", async (req, res) => {
   const videoId = req.query.id;
