@@ -29,6 +29,8 @@ app.get("/stream", async (req, res) => {
     return res.status(400).send("Missing YouTube video ID");
   }
 
+  const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+
   try {
     ytdl(videoUrl, {
       agent,
