@@ -50,24 +50,37 @@ app.get("/stream", async (req, res) => {
   }
 });
 
-// get lyrics
 app.get("/lyrics", async (req, res) => {
   const title = req.query.title;
 
   if (!title) {
-    return res.status(400).send("Missing artist or title");
+    return res.status(400).send("Missing title");
   }
+
+  // Step 1: Remove everything in parentheses
+  let cleanedTitleString = title.replace(/\s*\(.*?\)/, "").trim();
+
+  // Step 2: Remove commas
+  cleanedStringTitle = cleanedTitleString.replace(/,/g, "").trim();
 
   try {
     const response = await axios.get(
-      `https://api.textyl.co/api/lyrics?q=${title}`,
+      `https://api.textyl.co/api/lyrics?q=${encodeURIComponent(
+        cleanedStringTitle
+      )}`,
       {
         httpsAgent,
       }
     );
     res.json(response.data);
   } catch (error) {
-    console.error("Error fetching lyrics:", error);
+    if (error.response && error.response.status === 404) {
+      // Handle 404 - lyrics not found
+      return res.status(404).send("Lyrics not found");
+    } else {
+      console.error("Error fetching lyrics:", error);
+      res.status(500).send("Error fetching lyrics");
+    }
   }
 });
 
