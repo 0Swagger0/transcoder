@@ -8,9 +8,17 @@ const puppeteer = require("puppeteer-extra");
 const StealthPlugin = require("puppeteer-extra-plugin-stealth");
 const { default: axios } = require("axios");
 const https = require("https");
+const Bottleneck = require("bottleneck"); // For rate limiting
+
 puppeteer.use(StealthPlugin());
 
 const httpsAgent = new https.Agent({ rejectUnauthorized: false });
+
+// Bottleneck limiter for YouTube and Lyrics API to prevent rate-limiting
+const limiter = new Bottleneck({
+  minTime: 500, // Limit to 2 requests per second
+  maxConcurrent: 5, // Maximum concurrent API calls
+});
 
 const agentOptions = {
   pipelining: 5,
@@ -18,10 +26,12 @@ const agentOptions = {
   localAddress: "127.0.0.1",
 };
 
-const agent = ytdl.createAgent(
+const agent = ytdl.createProxyAgent(
+  { uri: "http://Swagger_ZJiEV:Arjun_990440@unblock.oxylabs.io:60000" },
   JSON.parse(fs.readFileSync("cookies.json"), agentOptions)
 );
 
+// Stream audio from YouTube
 app.get("/stream", async (req, res) => {
   const videoId = req.query.id;
 
@@ -32,24 +42,31 @@ app.get("/stream", async (req, res) => {
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
 
   try {
-    ytdl(videoUrl, {
-      agent,
-      requestOptions: {
-        headers: {
-          "User-Agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
-        },
-      },
-      filter: "audioonly",
-    }).pipe(res);
-
-    res.setHeader("Content-Type", "audio/mpeg");
+    // Throttle the ytdl-core request to prevent being rate-limited
+    limiter
+      .schedule(() =>
+        ytdl(videoUrl, {
+          agent,
+          requestOptions: {
+            headers: {
+              "User-Agent":
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
+            },
+          },
+          filter: "audioonly",
+        })
+      )
+      .then((stream) => {
+        res.setHeader("Content-Type", "audio/mpeg");
+        stream.pipe(res);
+      });
   } catch (error) {
     console.error("Error fetching audio stream:", error);
     res.status(500).send("Error fetching audio stream");
   }
 });
 
+// Fetch lyrics using a third-party API with rate-limiting
 app.get("/lyrics", async (req, res) => {
   const title = req.query.title;
 
@@ -61,17 +78,21 @@ app.get("/lyrics", async (req, res) => {
   let cleanedTitleString = title.replace(/\s*\(.*?\)/, "").trim();
 
   // Step 2: Remove commas
-  cleanedStringTitle = cleanedTitleString.replace(/,/g, "").trim();
+  let cleanedStringTitle = cleanedTitleString.replace(/,/g, "").trim();
 
   try {
-    const response = await axios.get(
-      `https://api.textyl.co/api/lyrics?q=${encodeURIComponent(
-        cleanedStringTitle
-      )}`,
-      {
-        httpsAgent,
-      }
+    // Use the limiter to rate-limit lyrics API requests
+    const response = await limiter.schedule(() =>
+      axios.get(
+        `https://api.textyl.co/api/lyrics?q=${encodeURIComponent(
+          cleanedStringTitle
+        )}`,
+        {
+          httpsAgent,
+        }
+      )
     );
+
     res.json(response.data);
   } catch (error) {
     if (error.response && error.response.status === 404) {
