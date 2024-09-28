@@ -26,8 +26,7 @@ const agentOptions = {
   localAddress: "127.0.0.1",
 };
 
-const agent = ytdl.createProxyAgent(
-  { uri: "http://Swagger_ZJiEV:Arjun_990440@unblock.oxylabs.io:60000" },
+const agent = ytdl.createAgent(
   JSON.parse(fs.readFileSync("cookies.json"), agentOptions)
 );
 
