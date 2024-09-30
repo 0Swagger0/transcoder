@@ -55,7 +55,6 @@ app.get("/stream", async (req, res) => {
               "Accept-Encoding": "gzip, deflate, sdch",
               "Accept-Language": "en-US,en;q=0.8",
               "Upgrade-Insecure-Requests": "1",
-              "Cache-Control": "max-age=0",
               "x-youtube-client-name": "1",
               "x-youtube-client-version": "2.20200202.00.00",
               Connection: "keep-alive",
