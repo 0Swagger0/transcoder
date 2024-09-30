@@ -1,7 +1,7 @@
 [
   {
     "domain": ".youtube.com",
-    "expirationDate": 1759231028.147892,
+    "expirationDate": 1759225307.547958,
     "hostOnly": false,
     "httpOnly": true,
     "name": "__Secure-3PSIDCC",
@@ -10,12 +10,12 @@
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "AKEyXzWJPHB5Fxy0xTZS0tzjzfWodm7yAOnXDqC4px4ToBvHa5bc74FIxipg6GtnmLcWbYjM",
+    "value": "AKEyXzVE_avctARlqF3TbNautlm9decJuezq4TXerG48IocxwZTd4E1o2C5_AVeyIjAy2cEo",
     "id": 1
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1790767023.255743,
+    "expirationDate": 1790761302.719532,
     "hostOnly": false,
     "httpOnly": true,
     "name": "LOGIN_INFO",
@@ -24,12 +24,12 @@
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "AFmmF2swRAIgOO3BiwGyVb9lDk7bVPkU7QF3oWd04lbL9ij8iKOX0A8CICJm_YwHYpKoV5bhP-E7HQaRQYSLPgdZpOO1ntVR_9YB:QUQ3MjNmeElya3BXV29IVnEycFlvY2ZCYWxLUEFJMDJOZW9OamNqM2ZJZjBvSlU1YVRIY05nTFRuZGRoSlB3VFo1ZzZNTVRlMEFLWW5OVTZ1cFZUWnVOX2czWmR4aXdxTmlqMU1nWmNrRzdHR3dWeldramRXMXp1NjAtcmkyc0dvZ29td1drZVJ6WS0tc3djeGRwUkRuRFBiN21QRXRoZlBR",
+    "value": "AFmmF2swRQIgB1LTnVpBt3zyZFrNYjQ1oTlFiGFkXPoYj0ducKSKNsECIQDoBvKyasF5z28DAOKhoN_1qfSEhYbIBEEUnjHEEl9AmQ:QUQ3MjNmd0ZadTdTRjJaa1NPU3BmV1VaQ1lPNktFS29lQUhzbGFmcHRnTkppaGt1ZFVySEpuMXpfSjBYZ1o0dWxleUEtLTRVX1FHdC1sbWhmcHhMZ1NHeGMtN2JnNE5mY09LOHlqaWx4VzAwOFpzZXA4Qlo0QjBtT2RyQ2JGUnQteEVpWjRDckI0OUFRYXpwenVuRzVmdTJ4a3htWFlwSWlR",
     "id": 2
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1759231028.147765,
+    "expirationDate": 1759225307.547835,
     "hostOnly": false,
     "httpOnly": false,
     "name": "SIDCC",
@@ -38,12 +38,12 @@
     "secure": false,
     "session": false,
     "storeId": "0",
-    "value": "AKEyXzXWxhXHrpwRbVSU8iLTcUGdc05YWU1m4N8TOch-BvMYvkIgS9SdpaJ8pinEiBeItPhJ",
+    "value": "AKEyXzUl-KB-Ti6UxJzBoJpkFBji2B9nUP9MfJnKKbEKWX-6Pg8LlTFowSVxzMMZQj9P2nuJtA",
     "id": 3
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1790767022,
+    "expirationDate": 1790761301,
     "hostOnly": false,
     "httpOnly": false,
     "name": "PREF",
@@ -57,7 +57,7 @@
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1743247017.483827,
+    "expirationDate": 1743241297.191154,
     "hostOnly": false,
     "httpOnly": true,
     "name": "VISITOR_PRIVACY_METADATA",
@@ -66,12 +66,12 @@
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "CgJJThIEGgAgRQ%3D%3D",
+    "value": "CgJJThIEGgAgHA%3D%3D",
     "id": 5
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1743247017.483787,
+    "expirationDate": 1743241297.191113,
     "hostOnly": false,
     "httpOnly": true,
     "name": "VISITOR_INFO1_LIVE",
@@ -80,7 +80,7 @@
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "mQaHxKjGPx0",
+    "value": "gLdV1dCba68",
     "id": 6
   },
   {
@@ -94,12 +94,12 @@
     "secure": true,
     "session": true,
     "storeId": "0",
-    "value": "BKXjRnQZw_g",
+    "value": "XQ4SwxpPiLk",
     "id": 7
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1790767016.648292,
+    "expirationDate": 1790761296.338898,
     "hostOnly": false,
     "httpOnly": false,
     "name": "__Secure-3PAPISID",
@@ -108,12 +108,12 @@
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "jV4hEuKIht8AlHzX/Amwu5ng-Yu7qByRtw",
+    "value": "2bajuvUoDmoKAiD-/Ap66EMr6navIr3X2n",
     "id": 8
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1790767016.648259,
+    "expirationDate": 1790761296.338863,
     "hostOnly": false,
     "httpOnly": false,
     "name": "__Secure-1PAPISID",
@@ -122,12 +122,12 @@
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "jV4hEuKIht8AlHzX/Amwu5ng-Yu7qByRtw",
+    "value": "2bajuvUoDmoKAiD-/Ap66EMr6navIr3X2n",
     "id": 9
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1790767016.648097,
+    "expirationDate": 1790761296.338696,
     "hostOnly": false,
     "httpOnly": true,
     "name": "__Secure-3PSID",
@@ -136,12 +136,12 @@
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "g.a000ogjUqhaWizUjO_KOyo2y8O8Fs6O40aepgmPED2iDpklqmsMyyDUOMj4zXYv_885woQGnMQACgYKARESARcSFQHGX2MibIWwHcWBQJY-wNRyqTh6ixoVAUF8yKqbzWZ7Uz9i785S5pmWY8S00076",
+    "value": "g.a000ogjUqojRWeXyt2nX-AbH-lTfpNiJAHtrVExFB8nlNGrKzy5_tnYgui9rJEMITJkj69YnRwACgYKAXESARcSFQHGX2MixIMqU-WzSpPxT1fQJTTokBoVAUF8yKqLu_6nAs1PboEvbP_yerKY0076",
     "id": 10
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1790767016.648195,
+    "expirationDate": 1790761296.338796,
     "hostOnly": false,
     "httpOnly": false,
     "name": "APISID",
@@ -150,12 +150,12 @@
     "secure": false,
     "session": false,
     "storeId": "0",
-    "value": "6dQhTPaqTbUysM7p/AEljntKkBvVWMg7Af",
+    "value": "oPfhVtt-sfRy35Lc/AvTlltu7JP1ZN0XFw",
     "id": 11
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1790767016.648135,
+    "expirationDate": 1790761296.338732,
     "hostOnly": false,
     "httpOnly": true,
     "name": "HSID",
@@ -164,12 +164,12 @@
     "secure": false,
     "session": false,
     "storeId": "0",
-    "value": "A7xOuEk8qpJpMHh2Y",
+    "value": "Af8GCzbF8rQa_cjHl",
     "id": 12
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1759231016.647964,
+    "expirationDate": 1759225296.33857,
     "hostOnly": false,
     "httpOnly": true,
     "name": "__Secure-1PSIDTS",
@@ -178,12 +178,12 @@
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "sidts-CjABQlrA-ElvTVz7j9Jmtr9bV18rm_k0nsHhO8yQ2xxkTgmCnxj7I4eC4rZbnQYIAGoQAA",
+    "value": "sidts-CjIBQlrA-I8NT_SWqzPil09aB5wMQbTW0ieq8XM1sUc9bjG0TnjDZmA0gJatWh09pDno9hAA",
     "id": 13
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1790767016.648165,
+    "expirationDate": 1790761296.338762,
     "hostOnly": false,
     "httpOnly": true,
     "name": "SSID",
@@ -192,12 +192,12 @@
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "ANfUgUlNYJMLq0EGK",
+    "value": "ATmzIpW24YtOmxDJe",
     "id": 14
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1790767016.648224,
+    "expirationDate": 1790761296.338827,
     "hostOnly": false,
     "httpOnly": false,
     "name": "SAPISID",
@@ -206,12 +206,12 @@
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "jV4hEuKIht8AlHzX/Amwu5ng-Yu7qByRtw",
+    "value": "2bajuvUoDmoKAiD-/Ap66EMr6navIr3X2n",
     "id": 15
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1790767016.648042,
+    "expirationDate": 1790761296.33865,
     "hostOnly": false,
     "httpOnly": true,
     "name": "__Secure-1PSID",
@@ -220,12 +220,12 @@
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "g.a000ogjUqhaWizUjO_KOyo2y8O8Fs6O40aepgmPED2iDpklqmsMyMZP5xxfztwR6zqf-rlLicwACgYKAVASARcSFQHGX2MiNFaNb6JOt7UTWA1yxdFoGBoVAUF8yKo1kFmzEUiEWfAd0UvzV0CJ0076",
+    "value": "g.a000ogjUqojRWeXyt2nX-AbH-lTfpNiJAHtrVExFB8nlNGrKzy5_aSytVP_SexOvGLgGNwYsUgACgYKAX4SARcSFQHGX2MiLpKEqvKLmYYUACR3xGmWKRoVAUF8yKqtUJjDtOvBabwE_fp0adLz0076",
     "id": 16
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1759231028.147846,
+    "expirationDate": 1759225307.547913,
     "hostOnly": false,
     "httpOnly": true,
     "name": "__Secure-1PSIDCC",
@@ -234,12 +234,12 @@
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "AKEyXzXik672NzU3yPRkywHbeK0SpNY-7Ui5dQwh5aMk9tSczKEX3gZlrMGHHARk0v8n2-sf",
+    "value": "AKEyXzUm_6B6XYauALaAYNnSZGWKnL3b4I54uHOsFj5aGsvHGZznekj9-R9w1ejdysna-KaRkQ",
     "id": 17
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1759231016.648007,
+    "expirationDate": 1759225296.338614,
     "hostOnly": false,
     "httpOnly": true,
     "name": "__Secure-3PSIDTS",
@@ -248,12 +248,12 @@
     "secure": true,
     "session": false,
     "storeId": "0",
-    "value": "sidts-CjABQlrA-ElvTVz7j9Jmtr9bV18rm_k0nsHhO8yQ2xxkTgmCnxj7I4eC4rZbnQYIAGoQAA",
+    "value": "sidts-CjIBQlrA-I8NT_SWqzPil09aB5wMQbTW0ieq8XM1sUc9bjG0TnjDZmA0gJatWh09pDno9hAA",
     "id": 18
   },
   {
     "domain": ".youtube.com",
-    "expirationDate": 1790767016.647894,
+    "expirationDate": 1790761296.338497,
     "hostOnly": false,
     "httpOnly": false,
     "name": "SID",
@@ -262,7 +262,7 @@
     "secure": false,
     "session": false,
     "storeId": "0",
-    "value": "g.a000ogjUqhaWizUjO_KOyo2y8O8Fs6O40aepgmPED2iDpklqmsMyzDrP-yD7RrCF7mTRVYPb9AACgYKAXkSARcSFQHGX2Mi4cWDMnMMO7FnWbSmDKVnYhoVAUF8yKrkeM0LtrUdhgQHp0R5isWb0076",
+    "value": "g.a000ogjUqojRWeXyt2nX-AbH-lTfpNiJAHtrVExFB8nlNGrKzy5_r5wB0-YTlhi5X2LO2Xi8nQACgYKAfUSARcSFQHGX2Mi1Kdd50xOupDyRBZ4LOeRyhoVAUF8yKrlfkfTXJd_-whLW3sXuHhU0076",
     "id": 19
   }
 ]
