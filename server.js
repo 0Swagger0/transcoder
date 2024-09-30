@@ -9,7 +9,6 @@ const StealthPlugin = require("puppeteer-extra-plugin-stealth");
 const { default: axios } = require("axios");
 const https = require("https");
 const Bottleneck = require("bottleneck"); // For rate limiting
-const { exec } = require("child_process");
 
 puppeteer.use(StealthPlugin());
 
