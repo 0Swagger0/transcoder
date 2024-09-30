@@ -46,6 +46,23 @@ app.get("/stream", async (req, res) => {
       .schedule(() =>
         ytdl(videoUrl, {
           agent,
+          requestOptions: {
+            headers: {
+              "User-Agent":
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
+              Accept:
+                "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+              "Accept-Encoding": "gzip, deflate, sdch",
+              "Accept-Language": "en-US,en;q=0.8",
+              "Upgrade-Insecure-Requests": "1",
+              "Cache-Control": "max-age=0",
+              "x-youtube-client-name": "1",
+              "x-youtube-client-version": "2.20200202.00.00",
+              Connection: "keep-alive",
+              Referer: "https://www.google.com/",
+              Host: "www.youtube.com",
+            },
+          },
           filter: "audioonly",
         })
       )
