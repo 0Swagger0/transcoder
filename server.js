@@ -30,6 +30,57 @@ const agent = ytdl.createAgent(
   JSON.parse(fs.readFileSync("cookies.json"), agentOptions)
 );
 
+(async () => {
+  const browser = await puppeteer.launch({
+    headless: false, // Set to true for headless mode
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
+  const page = await browser.newPage();
+
+  // Set user-agent (optional)
+  await page.setUserAgent(
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+  );
+
+  // Navigate to Google login page
+  await page.goto("https://accounts.google.com/", {
+    waitUntil: "networkidle2",
+  });
+
+  // Input your Google account email
+  await page.type('input[type="email"]', "meenaarjun229@gmail.com", {
+    delay: 100,
+  });
+  await page.click("#identifierNext");
+  await page.waitForTimeout(2000); // Wait for the transition
+
+  // Input your Google account password
+  await page.type('input[type="password"]', "9537155202", { delay: 100 });
+  await page.click("#passwordNext");
+
+  // Wait for the login to complete and YouTube to load
+  await page.waitForNavigation({ waitUntil: "networkidle2" });
+
+  // Redirect to YouTube
+  await page.goto("https://www.youtube.com", { waitUntil: "networkidle2" });
+
+  // Optional: Wait for a specific element that indicates login is complete
+  // You can adjust this selector based on your needs
+  await page.waitForSelector("#avatar-btn", { timeout: 60000 }); // Wait for avatar button (logged-in state)
+
+  // Get all cookies
+  const cookies = await page.cookies();
+
+  // Filter cookies related to YouTube
+  const youtubeCookies = cookies.filter((cookie) =>
+    cookie.domain.includes(".youtube.com")
+  );
+
+  console.log(youtubeCookies);
+
+  // Close browser
+  await browser.close();
+})();
 // Stream audio from YouTube
 app.get("/stream", async (req, res) => {
   const videoId = req.query.id;
