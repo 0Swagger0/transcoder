@@ -9,6 +9,7 @@ const StealthPlugin = require("puppeteer-extra-plugin-stealth");
 const { default: axios } = require("axios");
 const https = require("https");
 const Bottleneck = require("bottleneck"); // For rate limiting
+const ytcr = require("ytcr"); // ytcr for YouTube authentication
 
 puppeteer.use(StealthPlugin());
 
@@ -46,12 +47,6 @@ app.get("/stream", async (req, res) => {
       .schedule(() =>
         ytdl(videoUrl, {
           agent,
-          requestOptions: {
-            headers: {
-              "User-Agent":
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
-            },
-          },
           filter: "audioonly",
         })
       )
@@ -107,3 +102,5 @@ app.get("/lyrics", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
+
+// Function to authenticate with YouTube using ytcr and get cookies and headers
