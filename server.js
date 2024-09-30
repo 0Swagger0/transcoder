@@ -9,7 +9,6 @@ const StealthPlugin = require("puppeteer-extra-plugin-stealth");
 const { default: axios } = require("axios");
 const https = require("https");
 const Bottleneck = require("bottleneck"); // For rate limiting
-const ytcr = require("ytcr"); // ytcr for YouTube authentication
 
 puppeteer.use(StealthPlugin());
 
@@ -102,5 +101,3 @@ app.get("/lyrics", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
-
-// Function to authenticate with YouTube using ytcr and get cookies and headers

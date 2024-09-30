@@ -11,15 +11,10 @@
   "description": "",
   "dependencies": {
     "@distube/ytdl-core": "^4.14.4",
-    "axios": "^1.7.2",
     "bottleneck": "^2.19.5",
     "express": "^4.19.2",
-    "https-proxy-agent": "^7.0.5",
     "puppeteer": "^10.0.0",
     "puppeteer-extra": "^3.3.6",
-    "puppeteer-extra-plugin-stealth": "^2.11.2",
-    "tough-cookie": "^5.0.0",
-    "yt-stream": "^1.7.3",
-    "ytcr": "^1.0.0"
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
   }
 }
