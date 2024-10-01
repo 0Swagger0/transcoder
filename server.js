@@ -55,19 +55,16 @@ app.get("/lyrics", async (req, res) => {
   let cleanedTitleString = title.replace(/\s*\(.*?\)/, "").trim();
 
   // Step 2: Remove commas
-  let cleanedStringTitle = cleanedTitleString.replace(/,/g, "").trim();
+  let cleanedStringTitle = cleanedTitleString.replace(/[,&|]/g, "").trim();
 
   try {
-    // Use the limiter to rate-limit lyrics API requests
-    const response = await limiter.schedule(() =>
-      axios.get(
-        `https://api.textyl.co/api/lyrics?q=${encodeURIComponent(
-          cleanedStringTitle
-        )}`,
-        {
-          httpsAgent,
-        }
-      )
+    axios.get(
+      `https://api.textyl.co/api/lyrics?q=${encodeURIComponent(
+        cleanedStringTitle
+      )}`,
+      {
+        httpsAgent,
+      }
     );
 
     res.json(response.data);
