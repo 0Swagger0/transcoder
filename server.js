@@ -18,13 +18,19 @@ app.get("/stream", async (req, res) => {
     return res.status(400).send("Missing YouTube video ID");
   }
 
-  // Read the cookies from cookies.json file
-  const cookies = JSON.parse(fs.readFileSync("cookies.json"));
+  const NORMAL_OAUTH2 = new YtdlCore.OAuth2({
+    accessToken:
+      "ya29.a0AcM612w5la_T0-a0KXCJL7JafammPfiQzAVm6H9F3mdfB3S1R2CP0mdn6pij0WnJiEDh9uuwKsyNHiKe5wDp3L2XmH5UuVGn0wxa__TL0Ym52RoZVbkGUEaPNQ-1CAH2Q2I3D-_ZXbPVN9gyuyLHjjwAA_iEWtH7AM6PoqTUaCgYKAYsSARISFQHGX2Miq8_8tQqmkf8PB5uEPeYSTg0175",
+    tokenType: "Bearer",
+  });
 
-  // Convert cookies into a single string (key=value pairs)
-  const cookieString = cookies
-    .map((cookie) => `${cookie.name}=${cookie.value}`)
-    .join("; ");
+  // // Read the cookies from cookies.json file
+  // const cookies = JSON.parse(fs.readFileSync("cookies.json"));
+
+  // // Convert cookies into a single string (key=value pairs)
+  // const cookieString = cookies
+  //   .map((cookie) => `${cookie.name}=${cookie.value}`)
+  //   .join("; ");
 
   const { poToken, visitorData } = await generate();
 
@@ -33,17 +39,9 @@ app.get("/stream", async (req, res) => {
   try {
     // Stream audio from YouTube
     const ytdl = new YtdlCore({
+      oauth2: NORMAL_OAUTH2,
       poToken: poToken,
       visitorData: visitorData,
-      requestOptions: {
-        headers: {
-          "User-Agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
-          "X-YouTube-Client-Name": "1",
-          "X-YouTube-Client-Version": "2.20210208.00.01",
-          Cookie: cookieString,
-        },
-      },
     });
     ytdl.download(videoUrl, { filter: "audioonly" }).pipe(res);
 
