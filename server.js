@@ -1,36 +1,14 @@
-const express = require("express");
-const fs = require("fs");
-const app = express();
-const ytdl = require("@distube/ytdl-core");
-const path = require("path");
-const port = 3000;
-const puppeteer = require("puppeteer-extra");
-const StealthPlugin = require("puppeteer-extra-plugin-stealth");
-const { default: axios } = require("axios");
-const https = require("https");
-const Bottleneck = require("bottleneck"); // For rate limiting
+import express from "express";
+import axios from "axios";
+import https from "https";
+import { YtdlCore } from "@ybd-project/ytdl-core";
 
-puppeteer.use(StealthPlugin());
+// express app initialization
+const app = express();
+const port = 3000;
 
 const httpsAgent = new https.Agent({ rejectUnauthorized: false });
 
-// Bottleneck limiter for YouTube and Lyrics API to prevent rate-limiting
-const limiter = new Bottleneck({
-  minTime: 500, // Limit to 2 requests per second
-  maxConcurrent: 5, // Maximum concurrent API calls
-});
-
-const agentOptions = {
-  pipelining: 5,
-  maxRedirections: 0,
-  localAddress: "127.0.0.1",
-};
-
-const agent = ytdl.createAgent(
-  JSON.parse(fs.readFileSync("cookies.json"), agentOptions)
-);
-
-// Stream audio from YouTube
 app.get("/stream", async (req, res) => {
   const videoId = req.query.id;
 
@@ -41,28 +19,15 @@ app.get("/stream", async (req, res) => {
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
 
   try {
-    // Throttle the ytdl-core request to prevent being rate-limited
-    limiter
-      .schedule(() =>
-        ytdl(videoUrl, {
-          agent,
-          requestOptions: {
-            headers: {
-              "User-Agent":
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
+    // Stream audio from YouTube
+    const ytdl = new YtdlCore({
+      poToken:
+        "MnT9xC-4aKOc7P38KQ90xJJX8kJCwHWu-f3DkxdGk1KC2M1wwjC2W1iREo4m8jH4cOM9rKkQ7cFXaposx3r90t4AHH7-XHSzS0BXFzbX5kCcsTufb_fBSPdIJyMNzi5e---MF6dov5z1ZVRn2GOs9H5feD_bbA==",
+      visitorData: "CgtuVVFCV09vcUIwQSic3-63BjIKCgJJThIEGgAgZA%3D%3D'",
+    });
+    ytdl.download(videoUrl, { filter: "audioonly" }).pipe(res);
 
-              "Accept-Language": "en-US,en;q=0.8",
-              "x-youtube-client-version": "2.20200202.00.00",
-              Connection: "keep-alive",
-            },
-          },
-          filter: "audioonly",
-        })
-      )
-      .then((stream) => {
-        res.setHeader("Content-Type", "audio/mpeg");
-        stream.pipe(res);
-      });
+    res.setHeader("Content-Type", "audio/mpeg");
   } catch (error) {
     console.error("Error fetching audio stream:", error);
     res.status(500).send("Error fetching audio stream");
