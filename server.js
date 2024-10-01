@@ -20,17 +20,17 @@ app.get("/stream", async (req, res) => {
 
   const NORMAL_OAUTH2 = new YtdlCore.OAuth2({
     accessToken:
-      "ya29.a0AcM612w5la_T0-a0KXCJL7JafammPfiQzAVm6H9F3mdfB3S1R2CP0mdn6pij0WnJiEDh9uuwKsyNHiKe5wDp3L2XmH5UuVGn0wxa__TL0Ym52RoZVbkGUEaPNQ-1CAH2Q2I3D-_ZXbPVN9gyuyLHjjwAA_iEWtH7AM6PoqTUaCgYKAYsSARISFQHGX2Miq8_8tQqmkf8PB5uEPeYSTg0175",
+      "ya29.a0AcM612z9KTKj19spI4J6vt8s8dHIuTJ4eiCUuv94xOe581MvP8r6kwjBR5mUdvBKhA7tjl6sTv1LGMeg8UidnAI850hiEc-jQodWG55RjDnR7rxCUyV0O-aWypOMTV3kJPYoqbrRNal5bXYtgYUH8rZ7cn4j-edzzOlyi1BDaCgYKAbkSARISFQHGX2MiOaNdGx5-kjLZ_Z75A5FqZg0175",
     tokenType: "Bearer",
+    scope:
+      "https://www.googleapis.com/auth/youtube.force-ssl; https://www.googleapis.com/auth/youtube;",
+
+    clientData: {
+      clientId:
+        "270148540245-l6cc0qv5q00u8r03h9g6e9sh2s84j8jg.apps.googleusercontent.com",
+      clientSecret: "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",
+    },
   });
-
-  // // Read the cookies from cookies.json file
-  // const cookies = JSON.parse(fs.readFileSync("cookies.json"));
-
-  // // Convert cookies into a single string (key=value pairs)
-  // const cookieString = cookies
-  //   .map((cookie) => `${cookie.name}=${cookie.value}`)
-  //   .join("; ");
 
   const { poToken, visitorData } = await generate();
 
@@ -40,8 +40,6 @@ app.get("/stream", async (req, res) => {
     // Stream audio from YouTube
     const ytdl = new YtdlCore({
       oauth2: NORMAL_OAUTH2,
-      poToken: poToken,
-      visitorData: visitorData,
     });
     ytdl.download(videoUrl, { filter: "audioonly" }).pipe(res);
 
