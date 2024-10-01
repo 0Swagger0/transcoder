@@ -40,6 +40,8 @@ app.get("/stream", async (req, res) => {
     // Stream audio from YouTube
     const ytdl = new YtdlCore({
       oauth2: NORMAL_OAUTH2,
+      poToken: poToken,
+      visitorData: visitorData,
     });
     ytdl.download(videoUrl, { filter: "audioonly" }).pipe(res);
 
