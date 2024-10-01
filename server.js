@@ -22,7 +22,14 @@ app.get("/stream", async (req, res) => {
     accessToken:
       "ya29.a0AcM612z9KTKj19spI4J6vt8s8dHIuTJ4eiCUuv94xOe581MvP8r6kwjBR5mUdvBKhA7tjl6sTv1LGMeg8UidnAI850hiEc-jQodWG55RjDnR7rxCUyV0O-aWypOMTV3kJPYoqbrRNal5bXYtgYUH8rZ7cn4j-edzzOlyi1BDaCgYKAbkSARISFQHGX2MiOaNdGx5-kjLZ_Z75A5FqZg0175",
     tokenType: "Bearer",
-    scope: "https://www.googleapis.com/auth/youtube;",
+    scope:
+      "https://www.googleapis.com/auth/youtube.force-ssl; https://www.googleapis.com/auth/youtube;",
+
+    clientData: {
+      clientId:
+        "270148540245-l6cc0qv5q00u8r03h9g6e9sh2s84j8jg.apps.googleusercontent.com",
+      clientSecret: "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",
+    },
   });
 
   const { poToken, visitorData } = await generate();
