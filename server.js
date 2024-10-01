@@ -3,6 +3,10 @@ import axios from "axios";
 import https from "https";
 import ytdl from "@distube/ytdl-core";
 import fs from "fs";
+import puppeteer from "puppeteer-extra";
+import StealthPlugin from "puppeteer-extra-plugin-stealth";
+
+puppeteer.use(StealthPlugin());
 
 // express app initialization
 const app = express();
