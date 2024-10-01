@@ -3,6 +3,7 @@ import axios from "axios";
 import https from "https";
 import { YtdlCore } from "@ybd-project/ytdl-core";
 import { generate } from "youtube-po-token-generator";
+import fs from "fs";
 
 // express app initialization
 const app = express();
@@ -26,6 +27,15 @@ app.get("/stream", async (req, res) => {
     const ytdl = new YtdlCore({
       poToken: poToken,
       visitorData: visitorData,
+      requestOptions: {
+        headers: {
+          "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
+          "X-YouTube-Client-Name": "1",
+          "X-YouTube-Client-Version": "2.20210208.00.01",
+          Cookies: JSON.parse(fs.readFileSync("./cookies.json", "utf8")),
+        },
+      },
     });
     ytdl.download(videoUrl, { filter: "audioonly" }).pipe(res);
 
