@@ -24,12 +24,6 @@ app.get("/stream", async (req, res) => {
     tokenType: "Bearer",
     scope:
       "https://www.googleapis.com/auth/youtube.force-ssl; https://www.googleapis.com/auth/youtube;",
-
-    clientData: {
-      clientId:
-        "270148540245-l6cc0qv5q00u8r03h9g6e9sh2s84j8jg.apps.googleusercontent.com",
-      clientSecret: "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",
-    },
   });
 
   const { poToken, visitorData } = await generate();
