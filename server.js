@@ -1,8 +1,7 @@
 import express from "express";
 import axios from "axios";
 import https from "https";
-import { YtdlCore } from "@ybd-project/ytdl-core";
-import { generate } from "youtube-po-token-generator";
+import ytdl from "@distube/ytdl-core";
 import fs from "fs";
 
 // express app initialization
@@ -18,32 +17,24 @@ app.get("/stream", async (req, res) => {
     return res.status(400).send("Missing YouTube video ID");
   }
 
-  const NORMAL_OAUTH2 = new YtdlCore.OAuth2({
-    accessToken:
-      "ya29.a0AcM612z9KTKj19spI4J6vt8s8dHIuTJ4eiCUuv94xOe581MvP8r6kwjBR5mUdvBKhA7tjl6sTv1LGMeg8UidnAI850hiEc-jQodWG55RjDnR7rxCUyV0O-aWypOMTV3kJPYoqbrRNal5bXYtgYUH8rZ7cn4j-edzzOlyi1BDaCgYKAbkSARISFQHGX2MiOaNdGx5-kjLZ_Z75A5FqZg0175",
-    tokenType: "Bearer",
-    scope:
-      "https://www.googleapis.com/auth/youtube.force-ssl; https://www.googleapis.com/auth/youtube;",
-
-    clientData: {
-      clientId:
-        "270148540245-l6cc0qv5q00u8r03h9g6e9sh2s84j8jg.apps.googleusercontent.com",
-      clientSecret: "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",
-    },
-  });
-
-  const { poToken, visitorData } = await generate();
+  const agentOptions = {
+    pipelining: 5,
+    maxRedirections: 0,
+  };
 
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
 
   try {
+    const agent = ytdl.createAgent(
+      JSON.parse(fs.readFileSync("./cookies.json", "utf8")),
+      agentOptions
+    );
+
     // Stream audio from YouTube
-    const ytdl = new YtdlCore({
-      oauth2: NORMAL_OAUTH2,
-      poToken: poToken,
-      visitorData: visitorData,
-    });
-    ytdl.download(videoUrl, { filter: "audioonly" }).pipe(res);
+    ytdl(videoUrl, {
+      agent,
+      filter: "audioonly",
+    }).pipe(res);
 
     res.setHeader("Content-Type", "audio/mpeg");
   } catch (error) {
