@@ -2,6 +2,7 @@ import express from "express";
 import axios from "axios";
 import https from "https";
 import { YtdlCore } from "@ybd-project/ytdl-core";
+import { generate } from "youtube-po-token-generator";
 
 // express app initialization
 const app = express();
@@ -16,14 +17,15 @@ app.get("/stream", async (req, res) => {
     return res.status(400).send("Missing YouTube video ID");
   }
 
+  const { poToken, visitorData } = await generate();
+
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
 
   try {
     // Stream audio from YouTube
     const ytdl = new YtdlCore({
-      poToken:
-        "MnT9xC-4aKOc7P38KQ90xJJX8kJCwHWu-f3DkxdGk1KC2M1wwjC2W1iREo4m8jH4cOM9rKkQ7cFXaposx3r90t4AHH7-XHSzS0BXFzbX5kCcsTufb_fBSPdIJyMNzi5e---MF6dov5z1ZVRn2GOs9H5feD_bbA==",
-      visitorData: "CgtuVVFCV09vcUIwQSic3-63BjIKCgJJThIEGgAgZA%3D%3D'",
+      poToken: poToken,
+      visitorData: visitorData,
     });
     ytdl.download(videoUrl, { filter: "audioonly" }).pipe(res);
 
