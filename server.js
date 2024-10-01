@@ -18,6 +18,14 @@ app.get("/stream", async (req, res) => {
     return res.status(400).send("Missing YouTube video ID");
   }
 
+  // Read the cookies from cookies.json file
+  const cookies = JSON.parse(fs.readFileSync("cookies.json"));
+
+  // Convert cookies into a single string (key=value pairs)
+  const cookieString = cookies
+    .map((cookie) => `${cookie.name}=${cookie.value}`)
+    .join("; ");
+
   const { poToken, visitorData } = await generate();
 
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
@@ -33,7 +41,7 @@ app.get("/stream", async (req, res) => {
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
           "X-YouTube-Client-Name": "1",
           "X-YouTube-Client-Version": "2.20210208.00.01",
-          Cookies: JSON.parse(fs.readFileSync("./cookies.json", "utf8")),
+          Cookie: cookieString,
         },
       },
     });
