@@ -56,10 +56,13 @@ app.get("/lyrics", async (req, res) => {
   }
 
   // Step 1: Remove everything in parentheses
-  let cleanedTitleString = title.replace(/\s*\(.*?\)/, "").trim();
+  let cleanedTitleString = title.replace(/\s*\(.*?\)/g, "").trim();
 
-  // Step 2: Remove commas
-  let cleanedStringTitle = cleanedTitleString.replace(/[,&|]/g, "").trim();
+  // Step 2: Remove commas and & symbols while preserving the other text
+  let cleanedStringTitle = cleanedTitleString
+    .replace(/[,&]/g, "") // Remove &, and ,
+    .replace(/\s\s+/g, " ") // Replace multiple spaces with a single space
+    .trim();
 
   try {
     const response = await axios.get(
