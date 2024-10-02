@@ -62,7 +62,7 @@ app.get("/lyrics", async (req, res) => {
   let cleanedStringTitle = cleanedTitleString.replace(/[,&|]/g, "").trim();
 
   try {
-    axios.get(
+    const response = await axios.get(
       `https://api.textyl.co/api/lyrics?q=${encodeURIComponent(
         cleanedStringTitle
       )}`,
